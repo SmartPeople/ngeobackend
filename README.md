@@ -1,4 +1,4 @@
-# PhoenixCowboy2Example
+# NGEOBackend
 
 An example application for using [phoenix_cowboy2](https://github.com/voicelayer/phoenix_cowboy2).
 

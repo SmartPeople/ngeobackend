@@ -1,12 +1,12 @@
-defmodule PhoenixCowboy2Example.Web do
+defmodule NGEOBackend.Web do
   @moduledoc """
   A module defining __using__ hooks for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use PhoenixCowboy2Example.Web, :controller
-      use PhoenixCowboy2Example.Web, :view
+      use NGEOBackend.Web, :controller
+      use NGEOBackend.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -26,8 +26,8 @@ defmodule PhoenixCowboy2Example.Web do
     quote do
       use Phoenix.Controller
 
-      import PhoenixCowboy2Example.Router.Helpers
-      import PhoenixCowboy2Example.Gettext
+      import NGEOBackend.Router.Helpers
+      import NGEOBackend.Gettext
     end
   end
 
@@ -41,9 +41,9 @@ defmodule PhoenixCowboy2Example.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import PhoenixCowboy2Example.Router.Helpers
-      import PhoenixCowboy2Example.ErrorHelpers
-      import PhoenixCowboy2Example.Gettext
+      import NGEOBackend.Router.Helpers
+      import NGEOBackend.ErrorHelpers
+      import NGEOBackend.Gettext
     end
   end
 
@@ -56,7 +56,7 @@ defmodule PhoenixCowboy2Example.Web do
   def channel do
     quote do
       use Phoenix.Channel
-      import PhoenixCowboy2Example.Gettext
+      import NGEOBackend.Gettext
     end
   end
 

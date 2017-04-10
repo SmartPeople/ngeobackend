@@ -1,5 +1,5 @@
-defmodule PhoenixCowboy2Example.PageController do
-  use PhoenixCowboy2Example.Web, :controller
+defmodule NGEOBackend.PageController do
+  use NGEOBackend.Web, :controller
 
   def index(conn, _params) do
     http2 =

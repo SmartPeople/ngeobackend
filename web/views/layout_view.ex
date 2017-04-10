@@ -1,3 +1,3 @@
-defmodule PhoenixCowboy2Example.LayoutView do
-  use PhoenixCowboy2Example.Web, :view
+defmodule NGEOBackend.LayoutView do
+  use NGEOBackend.Web, :view
 end

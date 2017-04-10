@@ -1,14 +1,14 @@
-defmodule PhoenixCowboy2Example.Endpoint do
-  use Phoenix.Endpoint, otp_app: :phoenix_cowboy2_example
+defmodule NGEOBackend.Endpoint do
+  use Phoenix.Endpoint, otp_app: :ngeo_backend
 
-  socket "/socket", PhoenixCowboy2Example.UserSocket
+  socket "/socket", NGEOBackend.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :phoenix_cowboy2_example, gzip: false,
+    at: "/", from: :ngeo_backend, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -35,8 +35,8 @@ defmodule PhoenixCowboy2Example.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   plug Plug.Session,
     store: :cookie,
-    key: "_phoenix_cowboy2_example_key",
+    key: "_ngeo_backend_key",
     signing_salt: "6kyaoU6S"
 
-  plug PhoenixCowboy2Example.Router
+  plug NGEOBackend.Router
 end

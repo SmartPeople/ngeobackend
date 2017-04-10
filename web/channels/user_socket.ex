@@ -1,8 +1,8 @@
-defmodule PhoenixCowboy2Example.UserSocket do
+defmodule NGEOBackend.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", PhoenixCowboy2Example.RoomChannel
+  # channel "room:*", NGEOBackend.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -30,7 +30,7 @@ defmodule PhoenixCowboy2Example.UserSocket do
   # Would allow you to broadcast a "disconnect" event and terminate
   # all active sockets and channels for a given user:
   #
-  #     PhoenixCowboy2Example.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
+  #     NGEOBackend.Endpoint.broadcast("users_socket:#{user.id}", "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil

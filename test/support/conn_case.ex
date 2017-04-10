@@ -1,4 +1,4 @@
-defmodule PhoenixCowboy2Example.ConnCase do
+defmodule NGEOBackend.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,10 +20,10 @@ defmodule PhoenixCowboy2Example.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      import PhoenixCowboy2Example.Router.Helpers
+      import NGEOBackend.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint PhoenixCowboy2Example.Endpoint
+      @endpoint NGEOBackend.Endpoint
     end
   end
 

@@ -1,3 +1,3 @@
-defmodule PhoenixCowboy2Example.LayoutViewTest do
-  use PhoenixCowboy2Example.ConnCase, async: true
+defmodule NGEOBackend.LayoutViewTest do
+  use NGEOBackend.ConnCase, async: true
 end

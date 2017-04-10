@@ -1,5 +1,5 @@
-defmodule PhoenixCowboy2Example.ErrorView do
-  use PhoenixCowboy2Example.Web, :view
+defmodule NGEOBackend.ErrorView do
+  use NGEOBackend.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

@@ -1,4 +1,4 @@
-defmodule PhoenixCowboy2Example.ChannelCase do
+defmodule NGEOBackend.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -22,7 +22,7 @@ defmodule PhoenixCowboy2Example.ChannelCase do
 
 
       # The default endpoint for testing
-      @endpoint PhoenixCowboy2Example.Endpoint
+      @endpoint NGEOBackend.Endpoint
     end
   end
 

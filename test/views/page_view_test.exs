@@ -1,3 +1,3 @@
-defmodule PhoenixCowboy2Example.PageViewTest do
-  use PhoenixCowboy2Example.ConnCase, async: true
+defmodule NGEOBackend.PageViewTest do
+  use NGEOBackend.ConnCase, async: true
 end

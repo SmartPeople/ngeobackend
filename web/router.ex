@@ -1,5 +1,5 @@
-defmodule PhoenixCowboy2Example.Router do
-  use PhoenixCowboy2Example.Web, :router
+defmodule NGEOBackend.Router do
+  use NGEOBackend.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,14 +13,14 @@ defmodule PhoenixCowboy2Example.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PhoenixCowboy2Example do
+  scope "/", NGEOBackend do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", PhoenixCowboy2Example do
+  # scope "/api", NGEOBackend do
   #   pipe_through :api
   # end
 end

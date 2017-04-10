@@ -6,11 +6,11 @@
 use Mix.Config
 
 # Configures the endpoint
-config :phoenix_cowboy2_example, PhoenixCowboy2Example.Endpoint,
+config :ngeo_backend, NGEOBackend.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "rbKxpVBxbfazZLaC7We3OSl/h2u0JM1V5b4qSWfwyG8LnQy0r0/c3RU90h5TCT7l",
-  render_errors: [view: PhoenixCowboy2Example.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: PhoenixCowboy2Example.PubSub,
+  render_errors: [view: NGEOBackend.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: NGEOBackend.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger

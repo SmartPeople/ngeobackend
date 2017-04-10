@@ -1,8 +1,8 @@
-defmodule PhoenixCowboy2Example.Mixfile do
+defmodule NGEOBackend.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :phoenix_cowboy2_example,
+    [app: :ngeo_backend,
      version: "0.0.1",
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -16,7 +16,7 @@ defmodule PhoenixCowboy2Example.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {PhoenixCowboy2Example, []},
+    [mod: {NGEOBackend, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :phoenix_cowboy2, :logger, :gettext, :ranch, :cowlib, :cowboy]]
   end
 
@@ -36,6 +36,10 @@ defmodule PhoenixCowboy2Example.Mixfile do
      {:cowlib, github: "ninenines/cowlib", ref: "master", override: true, manager: :rebar3},
      {:cowboy, github: "ninenines/cowboy", ref: "2.0.0-pre.7", override: true, manager: :rebar3},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"}]
+     {:gettext, "~> 0.11"},
+    #  {:ex_admin, github: "smpallen99/ex_admin"},
+    #  {:postgrex, ">= 0.0.0"},
+    #  {:ecto, "~> 2.1"}
+    ]
   end
 end

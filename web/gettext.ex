@@ -1,11 +1,11 @@
-defmodule PhoenixCowboy2Example.Gettext do
+defmodule NGEOBackend.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 
   By using [Gettext](https://hexdocs.pm/gettext),
   your module gains a set of macros for translations, for example:
 
-      import PhoenixCowboy2Example.Gettext
+      import NGEOBackend.Gettext
 
       # Simple translation
       gettext "Here is the string to translate"
@@ -20,5 +20,5 @@ defmodule PhoenixCowboy2Example.Gettext do
 
   See the [Gettext Docs](https://hexdocs.pm/gettext) for detailed usage.
   """
-  use Gettext, otp_app: :phoenix_cowboy2_example
+  use Gettext, otp_app: :ngeo_backend
 end

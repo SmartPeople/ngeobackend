@@ -1,5 +1,5 @@
-defmodule PhoenixCowboy2Example.PageControllerTest do
-  use PhoenixCowboy2Example.ConnCase
+defmodule NGEOBackend.PageControllerTest do
+  use NGEOBackend.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"

@@ -21,7 +21,7 @@ end
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :phoenix_cowboy2_example, PhoenixCowboy2Example.Endpoint,
+config :ngeo_backend, NGEOBackend.Endpoint,
   https: [
     port: 4001,
     certfile: certfile,
@@ -39,7 +39,7 @@ config :phoenix_cowboy2_example, PhoenixCowboy2Example.Endpoint,
 
 
 # Watch static and templates for browser reloading.
-config :phoenix_cowboy2_example, PhoenixCowboy2Example.Endpoint,
+config :ngeo_backend, NGEOBackend.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
