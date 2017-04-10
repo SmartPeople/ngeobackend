@@ -5,6 +5,16 @@
 # is restricted to this project.
 use Mix.Config
 
+config :ngeo_backend, ecto_repos: [NGEOBackend.Repo]
+
+config :ngeo_backend, NGEOBackend.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "ecto_simple",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  port: "5432"
+
 # Configures the endpoint
 config :ngeo_backend, NGEOBackend.Endpoint,
   url: [host: "localhost"],
@@ -18,6 +28,15 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :ex_admin,
+  repo: NGEOBackend.Repo,
+  module: NGEOBackend,
+  modules: [
+    NGEOBackend.ExAdmin.Dashboard,
+  ]
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :xain, :after_callback, {Phoenix.HTML, :raw}
+

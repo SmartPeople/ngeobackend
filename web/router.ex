@@ -1,6 +1,7 @@
 defmodule NGEOBackend.Router do
   use NGEOBackend.Web, :router
-
+  use ExAdmin.Router
+  
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -19,6 +20,10 @@ defmodule NGEOBackend.Router do
     get "/", PageController, :index
   end
 
+  scope "/admin", ExAdmin do
+    pipe_through :browser
+    admin_routes()
+  end
   # Other scopes may use custom stacks.
   # scope "/api", NGEOBackend do
   #   pipe_through :api
