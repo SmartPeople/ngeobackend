@@ -2,10 +2,6 @@
 
 An example application for using [phoenix_cowboy2](https://github.com/voicelayer/phoenix_cowboy2).
 
-The diff for upgrading from cowboy to cowboy2 is available in this commit:
-
-https://github.com/voicelayer/phoenix_cowboy2_example/commit/437f9d1a98a408ce9bae7e46a18beb68d701fa17
-
 ## Running
 
  * `git clone git@gitgub.com:voicelayer/phoenix_cowboy2_example.git`
