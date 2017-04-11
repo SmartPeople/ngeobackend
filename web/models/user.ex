@@ -6,11 +6,13 @@ defmodule User do
   schema "users" do
     field :name
     field :password
+    timestamps()
+    has_many :events, NGEOBackend.Event
   end
 
   def changeset(user, params \\ %{}) do
     user
-    |> cast(params, [:name, :passwaord])
-    |> validate_required([:name, :passwaord])
+    |> cast(params, [:name, :password])
+    |> validate_required([:name, :password])
   end
 end
