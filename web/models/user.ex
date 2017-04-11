@@ -1,7 +1,7 @@
-defmodule User do
+defmodule NGEOBackend.User do
   use Ecto.Schema
-
   import Ecto.Changeset
+  import Ecto.Query
 
   schema "users" do
     field :name
@@ -14,5 +14,9 @@ defmodule User do
     user
     |> cast(params, [:name, :password])
     |> validate_required([:name, :password])
+  end
+
+  def all do
+    NGEOBackend.Repo.all(NGEOBackend.User)
   end
 end

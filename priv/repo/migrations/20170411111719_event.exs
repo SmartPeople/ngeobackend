@@ -3,7 +3,7 @@ defmodule NGEOBackend.Repo.Migrations.Event do
 
   def change do
     create table(:events) do
-      add :data, :jsonb
+      add :data, :map
       add :user_id, references(:users)
       timestamps()
     end

@@ -41,6 +41,7 @@ defmodule NGEOBackend.Mixfile do
      {:cowboy, github: "ninenines/cowboy", ref: "2.0.0-pre.7", override: true, manager: :rebar3},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
+    #  {:ex_admin, "~> 0.8.0"}
      {:ex_admin, github: "smpallen99/ex_admin"}
     ]
   end
