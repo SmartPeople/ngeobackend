@@ -7,14 +7,6 @@ use Mix.Config
 
 config :ngeo_backend, ecto_repos: [NGEOBackend.Repo]
 
-config :ngeo_backend, NGEOBackend.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  database: "ecto_simple",
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  port: "5432"
-
 # Configures the endpoint
 config :ngeo_backend, NGEOBackend.Endpoint,
   url: [host: "localhost"],

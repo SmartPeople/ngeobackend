@@ -60,3 +60,11 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
+
+config :ngeo_backend, NGEOBackend.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "ngeodb",
+  username: "postgres",
+  password: "postgres",
+  hostname: "data-store",
+  pool_size: 10

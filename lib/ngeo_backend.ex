@@ -8,6 +8,7 @@ defmodule NGEOBackend do
 
     # Define workers and child supervisors to be supervised
     children = [
+      supervisor(NGEOBackend.Repo, []),
       # Start the endpoint when the application starts
       supervisor(NGEOBackend.Endpoint, []),
       # Start your own worker by calling: NGEOBackend.Worker.start_link(arg1, arg2, arg3)

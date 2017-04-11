@@ -17,7 +17,9 @@ defmodule NGEOBackend.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {NGEOBackend, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :phoenix_cowboy2, :phoenix_ecto, :logger, :gettext, :ranch, :cowlib, :cowboy]]
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :phoenix_cowboy2, 
+                    :logger, :gettext, :ranch, :cowlib, :cowboy,
+                    :phoenix_ecto, :postgrex]]
   end
 
   # Specifies which paths to compile per environment.
@@ -33,14 +35,13 @@ defmodule NGEOBackend.Mixfile do
      {:phoenix_html, "~> 2.6"},
      {:phoenix_cowboy2, github: "voicelayer/phoenix_cowboy2"},
      {:phoenix_ecto, "~> 3.0"},
+     {:postgrex, ">= 0.0.0"},
      {:ranch, github: "ninenines/ranch", ref: "1.3.0", override: true, manager: :rebar3},
      {:cowlib, github: "ninenines/cowlib", ref: "master", override: true, manager: :rebar3},
      {:cowboy, github: "ninenines/cowboy", ref: "2.0.0-pre.7", override: true, manager: :rebar3},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:ex_admin, github: "smpallen99/ex_admin"},
-     {:postgrex, ">= 0.0.0"},
-     {:ecto, "~> 2.1"}
+     {:ex_admin, github: "smpallen99/ex_admin"}
     ]
   end
 end

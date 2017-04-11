@@ -55,3 +55,11 @@ config :logger, :console, format: "[$level] $message\n"
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+
+config :ngeo_backend, NGEOBackend.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "ngeodb",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  pool_size: 10
