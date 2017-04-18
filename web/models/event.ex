@@ -15,4 +15,8 @@ defmodule NGEOBackend.Event do
     |> validate_required([:data])
   end
 
+  def insert(data) do
+    NGEOBackend.Repo.insert(%NGEOBackend.Event{user_id: 2, data: data})
+  end
+
 end

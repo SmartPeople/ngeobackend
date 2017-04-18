@@ -3,6 +3,7 @@ defmodule NGEOBackend.UserSocket do
 
   ## Channels
   channel "room:*", NGEOBackend.RoomChannel
+  channel "geo:*", NGEOBackend.DataChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
