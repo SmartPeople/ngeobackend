@@ -1,8 +1,8 @@
-defmodule NGEOBackend.RoomChannel do
+defmodule NGEOBackend.DataChannel do
   use Phoenix.Channel
   require Logger
 
-  def join("room:lobby", message, socket) do
+  def join("geo:data", message, socket) do
     Process.flag(:trap_exit, true)
     :timer.send_interval(5000, :ping)
     send(self(), {:after_join, message})
@@ -10,7 +10,7 @@ defmodule NGEOBackend.RoomChannel do
     {:ok, socket}
   end
 
-  def join("room:" <> _private_subtopic, _message, _socket) do
+  def join("geo:" <> _private_subtopic, _message, _socket) do
     {:error, %{reason: "unauthorized"}}
   end
 
@@ -20,7 +20,7 @@ defmodule NGEOBackend.RoomChannel do
     {:noreply, socket}
   end
   def handle_info(:ping, socket) do
-    push socket, "new:msg", %{user: "SYSTEM", body: "ping"}
+    # push socket, "geo:new", %{user: "SYSTEM", body: "ping"}
     {:noreply, socket}
   end
 
@@ -29,9 +29,10 @@ defmodule NGEOBackend.RoomChannel do
     :ok
   end
 
-  def handle_in("new:msg", msg, socket) do
+  def handle_in("geo:new", msg, socket) do
     Logger.debug(inspect(msg))
-    broadcast! socket, "new:msg", %{user: msg["user"], body: msg["body"]}
+    broadcast! socket, "geo:new", %{user: msg["user"], body: msg["body"]}
+    NGEOBackend.Event.insert(msg["user"], msg["body"])
     {:reply, {:ok, %{msg: msg["body"]}}, assign(socket, :user, msg["user"])}
   end
 
