@@ -7,7 +7,6 @@ defmodule NGEOBackend.ExAdmin.Event do
       selectable_column()
       column :id
       column :uuid
-      column :data, type: :text
       actions()
     end
 

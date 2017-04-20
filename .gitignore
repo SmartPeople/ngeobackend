@@ -26,3 +26,4 @@ erl_crash.dump
 priv/server.key
 priv/server.pem
 .vagrant
+apikey.js
