@@ -4,6 +4,7 @@ defmodule NGEOBackend.Repo.Migrations.Event do
   def change do
     create table(:events) do
       add :data, :map
+      add :uuid, :string
       add :user_id, references(:users)
       timestamps()
     end

@@ -22,15 +22,9 @@ end
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :ngeo_backend, NGEOBackend.Endpoint,
-  https: [
-    port: 4001,
-    certfile: certfile,
-    keyfile: keyfile
-  ],
   http: [
-    port: 4002
+    port: 4000
   ],
-  handler: Phoenix.Endpoint.Cowboy2Handler,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,

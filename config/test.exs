@@ -8,3 +8,11 @@ config :ngeo_backend, NGEOBackend.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :ngeo_backend, NGEOBackend.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "test_ngeodb",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost",
+  pool_size: 10

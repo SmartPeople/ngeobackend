@@ -3,10 +3,18 @@
 
 // To use Phoenix channels, the first step is to import Socket
 // and connect at the socket path in "lib/my_app/endpoint.ex":
-import {Socket} from "phoenix"
+import {Socket, LongPoller} from "phoenix"
 
-let socket = new Socket("/socket", {params: {token: window.userToken}})
+let socket = new Socket("/socket", {
+  // params: {token: window.userToken}
+  logger: ((kind, msg, data) => { console.log(`${kind}: ${msg}`, data) })
+});
 
+socket.connect({user_id: "123"});
+
+socket.onOpen( ev => console.log("OPEN", ev) )
+socket.onError( ev => console.log("ERROR", ev) )
+socket.onClose( e => console.log("CLOSE", e))
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
 // which authenticates the session and assigns a `:current_user`.
@@ -51,12 +59,32 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
-
+// socket.connect()
+window.psocket = socket;
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
+let channel = socket.channel("room:lobby", {})
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  .receive("ignore", () => console.log("auth error"))
+  .receive("ok", () => console.log("join ok"));
 
+channel.onError(e => console.log("something went wrong", e))
+channel.onClose(e => console.log("channel closed", e))
+channel.on("new:msg", msg => {
+      console.log(msg);
+    });
+
+window.channel = channel;
+
+let geoDataChannel = socket.channel("geo:data", {})
+
+geoDataChannel.join()
+  .receive("ignore", () => console.log("auth error"))
+  .receive("ok", () => console.log("join ok"));
+
+geoDataChannel.onError(e => console.log("something went wrong", e))
+geoDataChannel.onClose(e => console.log("channel closed", e))
+geoDataChannel.on("geo:new", msg => {
+      console.log(msg);
+    });
+window.geoDataChannel = geoDataChannel;
 export default socket

@@ -1,6 +1,6 @@
 %{"connection": {:hex, :connection, "1.0.4", "a1cae72211f0eef17705aaededacac3eb30e6625b04a6117c1b2db6ace7d5976", [:mix], []},
-  "cowboy": {:git, "https://github.com/ninenines/cowboy.git", "d8cdd9bd15e76dca3014f6f76c0ab6666b1dbda3", [ref: "2.0.0-pre.7"]},
-  "cowlib": {:git, "https://github.com/ninenines/cowlib.git", "0e7abe0b24593f131add272c275406d8ed231805", [ref: "master"]},
+  "cowboy": {:hex, :cowboy, "1.1.2", "61ac29ea970389a88eca5a65601460162d370a70018afe6f949a29dca91f3bb0", [:rebar3], [{:cowlib, "~> 1.0.2", [hex: :cowlib, optional: false]}, {:ranch, "~> 1.3.2", [hex: :ranch, optional: false]}]},
+  "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], []},
   "csvlixir": {:hex, :csvlixir, "1.0.0", "e9fd30abfca2d312390060e86bb7ec52487c813824dcccad45bb13e85ecad6b1", [:mix], []},
   "db_connection": {:hex, :db_connection, "1.1.2", "2865c2a4bae0714e2213a0ce60a1b12d76a6efba0c51fbda59c9ab8d1accc7a8", [:mix], [{:connection, "~> 1.0.2", [hex: :connection, optional: false]}, {:poolboy, "~> 1.5", [hex: :poolboy, optional: true]}, {:sbroker, "~> 1.0", [hex: :sbroker, optional: true]}]},
   "decimal": {:hex, :decimal, "1.3.1", "157b3cedb2bfcb5359372a7766dd7a41091ad34578296e951f58a946fcab49c6", [:mix], []},
@@ -23,7 +23,7 @@
   "poison": {:hex, :poison, "2.2.0", "4763b69a8a77bd77d26f477d196428b741261a761257ff1cf92753a0d4d24a63", [:mix], []},
   "poolboy": {:hex, :poolboy, "1.5.1", "6b46163901cfd0a1b43d692657ed9d7e599853b3b21b95ae5ae0a777cf9b6ca8", [:rebar], []},
   "postgrex": {:hex, :postgrex, "0.13.2", "2b88168fc6a5456a27bfb54ccf0ba4025d274841a7a3af5e5deb1b755d95154e", [:mix], [{:connection, "~> 1.0", [hex: :connection, optional: false]}, {:db_connection, "~> 1.1", [hex: :db_connection, optional: false]}, {:decimal, "~> 1.0", [hex: :decimal, optional: false]}]},
-  "ranch": {:git, "https://github.com/ninenines/ranch.git", "40809cd2b257a8a53bcb5588ecaa88cc5381ff5c", [ref: "1.3.0"]},
+  "ranch": {:hex, :ranch, "1.3.2", "e4965a144dc9fbe70e5c077c65e73c57165416a901bd02ea899cfd95aa890986", [:rebar3], []},
   "scrivener": {:hex, :scrivener, "2.3.0", "16b1d744202d47233798205447b35592d96a209241c566304f84ddef63c718b2", [:mix], []},
   "scrivener_ecto": {:hex, :scrivener_ecto, "1.2.1", "dfa1a1584fed47f2280c0e066531edefe23c14bc66183309dfb1f3ed44629e5c", [:mix], [{:ecto, "~> 2.0", [hex: :ecto, optional: false]}, {:postgrex, "~> 0.11.0 or ~> 0.12.0 or ~> 0.13.0", [hex: :postgrex, optional: true]}, {:scrivener, "~> 2.3", [hex: :scrivener, optional: false]}]},
   "xain": {:hex, :xain, "0.6.0", "5b61cfe3ffc17904759ee30a699f9e0b1aefd943e996ee4cafea76e5b2f59e3a", [:mix], []}}
