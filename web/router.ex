@@ -14,16 +14,11 @@ defmodule NGEOBackend.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", NGEOBackend do
-    pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
-  end
-
-  scope "/admin", ExAdmin do
+  scope "/", ExAdmin do
     pipe_through :browser
     admin_routes()
   end
+  
   # Other scopes may use custom stacks.
   # scope "/api", NGEOBackend do
   #   pipe_through :api
