@@ -62,18 +62,18 @@ socket.onClose( e => console.log("CLOSE", e))
 // socket.connect()
 window.psocket = socket;
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("room:lobby", {})
-channel.join()
-  .receive("ignore", () => console.log("auth error"))
-  .receive("ok", () => console.log("join ok"));
+// let channel = socket.channel("room:lobby", {})
+// channel.join()
+//   .receive("ignore", () => console.log("auth error"))
+//   .receive("ok", () => console.log("join ok"));
 
-channel.onError(e => console.log("something went wrong", e))
-channel.onClose(e => console.log("channel closed", e))
-channel.on("new:msg", msg => {
-      console.log(msg);
-    });
+// channel.onError(e => console.log("something went wrong", e))
+// channel.onClose(e => console.log("channel closed", e))
+// channel.on("new:msg", msg => {
+//       console.log(msg);
+//     });
 
-window.channel = channel;
+// window.channel = channel;
 
 let geoDataChannel = socket.channel("geo:data", {})
 

@@ -19,10 +19,11 @@ defmodule NGEOBackend.DataChannel do
     push socket, "join", %{status: "connected"}
     {:noreply, socket}
   end
-  # def handle_info(:ping, socket) do
-  #   # push socket, "geo:new", %{user: "SYSTEM", body: "ping"}
-  #   {:noreply, socket}
-  # end
+  
+  def handle_info(:ping, socket) do
+    # push socket, "geo:new", %{user: "SYSTEM", body: "ping"}
+    {:noreply, socket}
+  end
 
   def terminate(reason, _socket) do
     Logger.debug"> leave #{inspect reason}"

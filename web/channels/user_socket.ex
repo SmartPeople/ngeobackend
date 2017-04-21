@@ -2,7 +2,7 @@ defmodule NGEOBackend.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "room:*", NGEOBackend.RoomChannel
+  # channel "room:*", NGEOBackend.RoomChannel
   channel "geo:*", NGEOBackend.DataChannel
 
   ## Transports
