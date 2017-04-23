@@ -4,7 +4,7 @@ defmodule NGEOBackend.DataChannel do
 
   def join("geo:data", message, socket) do
     Process.flag(:trap_exit, true)
-    :timer.send_interval(5000, :ping)
+    # :timer.send_interval(5000, :ping)
     send(self(), {:after_join, message})
 
     {:ok, socket}
@@ -28,6 +28,13 @@ defmodule NGEOBackend.DataChannel do
   def terminate(reason, _socket) do
     Logger.debug"> leave #{inspect reason}"
     :ok
+  end
+
+  def handle_in("geo:ping", msg, socket) do
+    Logger.debug(inspect(msg))
+    # broadcast! socket, "geo:ping", %{msg: "pong"}
+    push socket, "geo:ping", %{msg: "pong"}
+    {:reply, {:ok, %{msg: "pong"}}, assign(socket, :user, msg["user"])}
   end
 
   def handle_in("geo:new", msg, socket) do
