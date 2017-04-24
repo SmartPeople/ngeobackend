@@ -21,9 +21,5 @@ services:
       - data_store:data_store
     depends_on:
       - data_store
-    # volumes:
-    #   - ./:/opt/ngeobackend
     ports:
       - "4000:4000"
-      - "4001:4001"
-      - "4002:4002"

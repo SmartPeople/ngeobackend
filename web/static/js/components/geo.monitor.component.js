@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { apiKey } from './apikey.js';
 import GoogleMapReact from 'google-map-react';
+import { Connection } from './geo.monitor.service';
+import { apiKey } from './apikey.js';
 
 const style = {
     geoMonitor : {
@@ -20,11 +21,13 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 class Map extends Component {
 
     render() {
+        const position = this.props.position.body.coords;
+        console.log(position);
         return (
             <GoogleMapReact 
-                bootstrapURLKeys={{key:'AIzaSyDC13MzYSjbKUPn_MW-Q4b79GxrOPiYDzk'}}
-                defaultCenter={{lat: 59.95, lng: 30.33}}
-                defaultZoom={11}
+                bootstrapURLKeys={{ key: apiKey.key }}
+                center={{lat: position.latitude, lng: position.longitude}}
+                defaultZoom={18}
             >
                 <AnyReactComponent
                     lat={59.955413}
@@ -37,18 +40,58 @@ class Map extends Component {
 }
 
 export class GeoMonitor extends Component {
+
+    constructor(props) {
+        super(props);
+        this.connection = new Connection('123', 'geo:data', 'geo:new');
+        this.state = {
+            list: [],
+            show : null
+        };
+        this.LIMIT = 1000;
+    }
+
+    componentDidMount() {
+        this.connection
+            .mount()
+            .onmessage((msg => {
+                this.setState((prev) => {
+                    let list = prev.list.slice(0, this.LIMIT - 1);
+                    list.unshift(msg);
+                    return {list: list};
+                });
+            }));
+    }
+
+    componentWillUnmount() {
+        this.connection.unmount();
+    }
+
+    setShow(i) {
+        this.setState({show: this.state.list[i]});
+    }
+
     render() {
+        const list = this.state.list,
+              show = JSON.stringify(this.state.show, null, 4);
+        if(list.length > 0 && !this.state.show) {
+            this.setState({show: list[0]});
+        }
         return (
             <div className="geo-monitor" style={style.geoMonitor}>
                 <div className="list">
                     <ul>
-                        <li>List will be here</li>
+                        {list.map((event, i) =>
+                            <li key={i} onClick={() => this.setShow(i)}>
+                                {event.user}: {event.body.uuid}
+                            </li>
+                        )}
                     </ul>
                 </div>
                 <div className="map" style={style.geoMap}>
-                     <Map/>
+                     {this.state.show ? (<Map position={this.state.show}/>) : ('')}
                 </div>
-                <div className="obj"><pre>JSON object will be here!</pre></div>
+                <div className="obj"><pre>{show}</pre></div>
             </div>
         );
     }

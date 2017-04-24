@@ -41,7 +41,7 @@ defmodule NGEOBackend.DataChannel do
     Logger.debug(inspect(msg))
     broadcast! socket, "geo:new", %{user: msg["user"], body: msg["body"]}
     NGEOBackend.Event.insert(msg["user"], msg["body"])
-    {:reply, {:ok, %{msg: msg["body"]}}, assign(socket, :user, msg["user"])}
+    {:reply, {:ok, %{}}, assign(socket, :user, msg["user"])}
   end
 
 end
