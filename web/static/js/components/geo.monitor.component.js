@@ -27,7 +27,7 @@ class Map extends Component {
             <GoogleMapReact 
                 bootstrapURLKeys={{ key: apiKey.key }}
                 center={{lat: position.latitude, lng: position.longitude}}
-                defaultZoom={18}
+                defaultZoom={16}
             >
                 <AnyReactComponent
                     lat={59.955413}
@@ -48,7 +48,7 @@ export class GeoMonitor extends Component {
             list: [],
             show : null
         };
-        this.LIMIT = 1000;
+        this.LIMIT = 100;
     }
 
     componentDidMount() {
@@ -56,9 +56,13 @@ export class GeoMonitor extends Component {
             .mount()
             .onmessage((msg => {
                 this.setState((prev) => {
-                    let list = prev.list.slice(0, this.LIMIT - 1);
+                    const list = prev.list.slice(0, this.LIMIT - 1);
                     list.unshift(msg);
-                    return {list: list};
+                    const out = {list: list}
+                    if (!this.state.show) {
+                        out["show"] = list[0];
+                    }
+                    return out;
                 });
             }));
     }
@@ -74,9 +78,6 @@ export class GeoMonitor extends Component {
     render() {
         const list = this.state.list,
               show = JSON.stringify(this.state.show, null, 4);
-        if(list.length > 0 && !this.state.show) {
-            this.setState({show: list[0]});
-        }
         return (
             <div className="geo-monitor" style={style.geoMonitor}>
                 <div className="list">
