@@ -43,25 +43,21 @@ const style = {
 
 const AnyReactComponent = () => <div> <img style={style.pin} src="/images/location_marker_thumb.png" /> </div>;
 
-class Map extends Component {
-
-    render() {
-        const msg      = this.props.position.body,
-              position = msg.coords || msg.location.coords;
-        console.log(position);
-        return (
-            <GoogleMapReact 
-                bootstrapURLKeys={{ key: apiKey.key }}
-                center={{lat: position.latitude, lng: position.longitude}}
-                defaultZoom={16}
-            >
-                <AnyReactComponent
-                    lat={position.latitude}
-                    lng={position.longitude}
-                />
-            </GoogleMapReact>
-        );
-    }
+const Map = (props) => {
+    const msg = props.position.body,
+          pos = msg.coords || msg.location.coords;
+    return (
+        <GoogleMapReact 
+            bootstrapURLKeys={{ key: apiKey.key }}
+            center={{lat: pos.latitude, lng: pos.longitude}}
+            defaultZoom={16}
+        >
+            <AnyReactComponent
+                lat={pos.latitude}
+                lng={pos.longitude}
+            />
+        </GoogleMapReact>
+    );
 }
 
 export class GeoMonitor extends Component {
