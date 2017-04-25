@@ -15,7 +15,7 @@ const style = {
         justifyContent: 'space-between',
         height        : '600px'
     },
-    geoMap: {
+    geoMap : {
         width  : '30%',
         height : '100%',
         display: 'block',
@@ -33,10 +33,10 @@ const style = {
         padding  : 0
     },
     li : {
-        cursor: 'pointer'
+        cursor : 'pointer'
     },
     pin : {
-        width : '52px',
+        width    : '52px',
         marginTop: '-36px'
     }
 };
@@ -46,7 +46,8 @@ const AnyReactComponent = () => <div> <img style={style.pin} src="/images/locati
 class Map extends Component {
 
     render() {
-        const position = this.props.position.body.coords;
+        const msg      = this.props.position.body,
+              position = msg.coords || msg.location.coords;
         console.log(position);
         return (
             <GoogleMapReact 
@@ -100,34 +101,36 @@ export class GeoMonitor extends Component {
     }
 
     lineBody(event) {
-        if(event.body.coords) {
-            const coords = event.body.coords;
+        const msg = event.body;
+        if(msg.coords || msg.location) {
+            const coords = msg.coords || msg.location.coords;
             return [
                 round(coords.latitude),
                 round(coords.longitude),
                 round(coords.altitude)
                 ].join(', ');
         } else {
-            return event.body.msg;
+            return msg.message ? msg.message : 'Look at object';
         }
     }
 
     render() {
         const list = this.state.list,
-              show = JSON.stringify(this.state.show, null, 4);
+              show = JSON.stringify(this.state.show, null, 2);
+        console.log(this.state.show);
         return (
             <div className="geo-monitor" style={style.geoMonitor}>
                 <div className="list" style={style.list}>
                     <ul style={style.map}>
                         {list.map((event, i) =>
                             <li key={i} onClick={() => this.setShow(i)} style={style.li}>
-                                {event.user}: {this.lineBody(event)}
+                                <strong>{event.user}:</strong> {this.lineBody(event)}
                             </li>
                         )}
                     </ul>
                 </div>
                 <div className="map" style={style.geoMap}>
-                     {this.state.show ? (<Map position={this.state.show}/>) : ('')}
+                     {(this.state.show && (this.state.show.body.type === 0 || this.state.show.body.type === 2)) ? (<Map position={this.state.show}/>) : ('')}
                 </div>
                 <div className="obj"  style={style.obj}><pre>{show}</pre></div>
             </div>
