@@ -3,20 +3,45 @@ import GoogleMapReact from 'google-map-react';
 import { Connection } from './geo.monitor.service';
 import { apiKey } from './apikey.js';
 
+
+function round(val) {
+    return Math.round(val*100)/100;
+}
+
 const style = {
     geoMonitor : {
-        display       :'flex',
+        display       : 'flex',
         flexDirection : 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        height        : '600px'
     },
     geoMap: {
-        width: 400,
-        height: 400,
-        display: 'block'
+        width  : '30%',
+        height : '100%',
+        display: 'block',
+        margin : '0 4px'
+    },
+    list : {
+        overflow: 'auto',
+        height  : '100%'
+    },
+    obj : {
+        height  : '100%'
+    },
+    ul : {
+        listStyle: 'none',
+        padding  : 0
+    },
+    li : {
+        cursor: 'pointer'
+    },
+    pin : {
+        width : '52px',
+        marginTop: '-36px'
     }
 };
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = () => <div> <img style={style.pin} src="/images/location_marker_thumb.png" /> </div>;
 
 class Map extends Component {
 
@@ -30,9 +55,8 @@ class Map extends Component {
                 defaultZoom={16}
             >
                 <AnyReactComponent
-                    lat={59.955413}
-                    lng={30.337844}
-                    text={'Kreyser Avrora'}
+                    lat={position.latitude}
+                    lng={position.longitude}
                 />
             </GoogleMapReact>
         );
@@ -75,16 +99,29 @@ export class GeoMonitor extends Component {
         this.setState({show: this.state.list[i]});
     }
 
+    lineBody(event) {
+        if(event.body.coords) {
+            const coords = event.body.coords;
+            return [
+                round(coords.latitude),
+                round(coords.longitude),
+                round(coords.altitude)
+                ].join(', ');
+        } else {
+            return event.body.msg;
+        }
+    }
+
     render() {
         const list = this.state.list,
               show = JSON.stringify(this.state.show, null, 4);
         return (
             <div className="geo-monitor" style={style.geoMonitor}>
-                <div className="list">
-                    <ul>
+                <div className="list" style={style.list}>
+                    <ul style={style.map}>
                         {list.map((event, i) =>
-                            <li key={i} onClick={() => this.setShow(i)}>
-                                {event.user}: {event.body.uuid}
+                            <li key={i} onClick={() => this.setShow(i)} style={style.li}>
+                                {event.user}: {this.lineBody(event)}
                             </li>
                         )}
                     </ul>
@@ -92,7 +129,7 @@ export class GeoMonitor extends Component {
                 <div className="map" style={style.geoMap}>
                      {this.state.show ? (<Map position={this.state.show}/>) : ('')}
                 </div>
-                <div className="obj"><pre>{show}</pre></div>
+                <div className="obj"  style={style.obj}><pre>{show}</pre></div>
             </div>
         );
     }
