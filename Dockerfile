@@ -8,5 +8,7 @@ WORKDIR /opt/ngeobackend
 
 RUN cd /opt/ngeobackend && mix local.hex --force && mix deps.get && npm install 
 
-CMD bash -c 'sleep infinity'
-# CMD bash -c 'mix phoenix.server'
+RUN MIX_ENV=prod mix compile
+
+# CMD bash -c 'sleep infinity'
+CMD bash -c 'MIX_ENV=prod HOST="192.168.99.99" mix ecto.migrate && MIX_ENV=prod HOST="192.168.99.99" mix phoenix.server'

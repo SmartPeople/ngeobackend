@@ -7,7 +7,7 @@ import {Socket, LongPoller} from "phoenix"
 
 let socket = new Socket("/socket", {
   // params: {token: window.userToken}
-  logger: ((kind, msg, data) => { console.log(`${kind}: ${msg}`, data) })
+  // logger: ((kind, msg, data) => { console.log(`${kind}: ${msg}`, data) })
 });
 
 socket.connect({user_id: "123"});
@@ -60,31 +60,31 @@ socket.onClose( e => console.log("CLOSE", e))
 // from connect if you don't care about authentication.
 
 // socket.connect()
-window.psocket = socket;
+// window.psocket = socket;
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("room:lobby", {})
-channel.join()
-  .receive("ignore", () => console.log("auth error"))
-  .receive("ok", () => console.log("join ok"));
+// let channel = socket.channel("room:lobby", {})
+// channel.join()
+//   .receive("ignore", () => console.log("auth error"))
+//   .receive("ok", () => console.log("join ok"));
 
-channel.onError(e => console.log("something went wrong", e))
-channel.onClose(e => console.log("channel closed", e))
-channel.on("new:msg", msg => {
-      console.log(msg);
-    });
+// channel.onError(e => console.log("something went wrong", e))
+// channel.onClose(e => console.log("channel closed", e))
+// channel.on("new:msg", msg => {
+//       console.log(msg);
+//     });
 
-window.channel = channel;
+// window.channel = channel;
 
-let geoDataChannel = socket.channel("geo:data", {})
+// let geoDataChannel = socket.channel("geo:data", {})
 
-geoDataChannel.join()
-  .receive("ignore", () => console.log("auth error"))
-  .receive("ok", () => console.log("join ok"));
+// geoDataChannel.join()
+//   .receive("ignore", () => console.log("auth error"))
+//   .receive("ok", (msg) => console.log(msg));
 
-geoDataChannel.onError(e => console.log("something went wrong", e))
-geoDataChannel.onClose(e => console.log("channel closed", e))
-geoDataChannel.on("geo:new", msg => {
-      console.log(msg);
-    });
-window.geoDataChannel = geoDataChannel;
+// geoDataChannel.onError(e => (msg) => console.log(msg))
+// geoDataChannel.onClose(e => (msg) => console.log(msg))
+// geoDataChannel.on("geo:new", msg => {
+//       console.log(msg);
+//     });
+// window.geoDataChannel = geoDataChannel;
 export default socket
