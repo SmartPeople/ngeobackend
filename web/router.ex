@@ -38,8 +38,9 @@ defmodule NGEOBackend.Router do
     admin_routes()
   end
   
-  # Other scopes may use custom stacks.
-  # scope "/api", NGEOBackend do
-  #   pipe_through :api
-  # end
+  scope "/api", NGEOBackend do
+    pipe_through :api
+    post "/login",  ApiController, :loginAction
+  end
+  
 end

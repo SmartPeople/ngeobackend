@@ -1,6 +1,6 @@
 defmodule NGEOBackend.UserSocket do
   use Phoenix.Socket
-
+  require Logger
   ## Channels
   # channel "room:*", NGEOBackend.RoomChannel
   channel "geo:*", NGEOBackend.DataChannel
@@ -21,6 +21,8 @@ defmodule NGEOBackend.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(_params, socket) do
+    Logger.debug(inspect(_params))
+    Logger.debug(inspect(socket))
     {:ok, socket}
   end
 

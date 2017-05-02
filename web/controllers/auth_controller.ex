@@ -8,8 +8,8 @@ defmodule NGEOBackend.AuthPageController do
     render conn, "index.html", txt: inspect(get_current_user(conn))
   end
 
-  def loginAction(conn, %{"name" => name, "password" => password}) do
-    if user = Doorman.authenticate(name, password) do
+  def loginAction(conn, %{"email" => email, "password" => password}) do
+    if user = Doorman.authenticate(email, password) do
       conn
       |> login(user)
       |> put_flash(:notice, "Successfully logged in")

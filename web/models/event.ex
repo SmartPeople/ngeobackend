@@ -19,7 +19,7 @@ defmodule NGEOBackend.Event do
 
   def insert(name, data) do
     user = NGEOBackend.User 
-    |> NGEOBackend.Repo.get_by(name: name)
+    |> NGEOBackend.Repo.get_by(email: name)
     
     %NGEOBackend.Event{user: user, data: data, uuid: data["uuidV4Tracking"]} 
     |> NGEOBackend.Repo.insert

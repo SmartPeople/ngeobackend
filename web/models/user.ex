@@ -1,4 +1,5 @@
 defmodule NGEOBackend.User do
+  require Logger
   use NGEOBackend.Web, :model
   use Ecto.Schema
   import Ecto.Changeset
@@ -30,5 +31,17 @@ defmodule NGEOBackend.User do
 
   def all do
     NGEOBackend.Repo.all(NGEOBackend.User)
+  end
+
+  def api_token(user) do 
+    Logger.debug( inspect(user) )
+    {:ok, inserted} = DateTime.from_naive(user.inserted_at, "Etc/UTC")
+    Logger.debug( inspect(inserted) )
+    timestamp       = to_string(DateTime.to_unix(inserted))
+    Logger.debug( inspect(timestamp) )
+    %NGEOBackend.User{}
+    |> cast(%{email: user.email, password: timestamp}, ~w(email password))
+    |> hash_password
+    |> Ecto.Changeset.get_change(:hashed_password)
   end
 end
