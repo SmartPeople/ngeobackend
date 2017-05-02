@@ -4,7 +4,7 @@ defmodule NGEOBackend.ExAdmin.User do
   index do
     selectable_column()
     column :id
-    column :name
+    column :email
     column "Created", fn(event) ->
       Phoenix.HTML.Tag.content_tag :span, event.inserted_at
     end
@@ -15,5 +15,12 @@ defmodule NGEOBackend.ExAdmin.User do
   end
 
   register_resource NGEOBackend.User do
+    form user do
+      inputs "User" do
+        input user, :email
+        input user, :password
+      end
+    end
   end
+
 end

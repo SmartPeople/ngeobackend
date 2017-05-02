@@ -33,3 +33,8 @@ config :ex_admin,
 import_config "#{Mix.env}.exs"
 
 config :xain, :after_callback, {Phoenix.HTML, :raw}
+
+config :doorman,
+  repo: NGEOBackend.Repo,
+  secure_with: Doorman.Auth.Bcrypt,
+  user_module: NGEOBackend.User
