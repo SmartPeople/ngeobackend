@@ -1,9 +1,9 @@
 <div class="jumbotron">
-  <h1>NGEO Backend!</h1>
+  <h1>Login form</h1>
   <%= form_tag("/login", method: :post) %>
-  
     <input type="text" name="name" />
     <input type="password" name="password" />
     <input type="submit" />
   </form>
 </div>
+<pre><%= @txt %> </pre>
