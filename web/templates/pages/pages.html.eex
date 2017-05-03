@@ -1,4 +1,6 @@
 <div class="main">
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
     <h1 class="page-header">Monitoring</h1>
     <main role="main" id ="root">
     </main>

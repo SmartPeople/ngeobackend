@@ -16,17 +16,19 @@ const style = {
         height        : '600px'
     },
     geoMap : {
-        width  : '30%',
+        width  : '55%',
         height : '100%',
         display: 'block',
         margin : '0 4px'
     },
     list : {
         overflow: 'auto',
-        height  : '100%'
+        height  : '100%',
+        width   : '15%',
     },
     obj : {
-        height  : '100%'
+        height  : '100%',
+        width   : '30%',
     },
     ul : {
         listStyle: 'none',
