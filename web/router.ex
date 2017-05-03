@@ -40,14 +40,14 @@ defmodule NGEOBackend.Router do
   scope "/", NGEOBackend do
     pipe_through :public # Use the default public stack
 
-    get "/",        AuthPageController, :index
+    get "/login",   AuthPageController, :index
     get  "/logout", AuthPageController, :logoutAction
     post "/login",  AuthPageController, :loginAction
   end
 
   scope "/", NGEOBackend do
     pipe_through :private # Use the default public stack
-
+    get "/",           PagesController, :monitoring
     get "/monitoring", PagesController, :monitoring
   end
 

@@ -12,7 +12,7 @@ defmodule NGEOBackend.AuthPageController do
       conn
       |> login(user)
       |> put_flash(:notice, "Successfully logged in")
-      |> redirect(to: "/admin")
+      |> redirect(to: "/")
     else
       conn
       |> put_flash(:error, "No user found with the provided credentials")
