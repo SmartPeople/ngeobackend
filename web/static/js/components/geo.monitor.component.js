@@ -16,17 +16,19 @@ const style = {
         height        : '600px'
     },
     geoMap : {
-        width  : '30%',
+        width  : '55%',
         height : '100%',
         display: 'block',
         margin : '0 4px'
     },
     list : {
         overflow: 'auto',
-        height  : '100%'
+        height  : '100%',
+        width   : '15%',
     },
     obj : {
-        height  : '100%'
+        height  : '100%',
+        width   : '30%',
     },
     ul : {
         listStyle: 'none',
@@ -64,7 +66,7 @@ export class GeoMonitor extends Component {
 
     constructor(props) {
         super(props);
-        this.connection = new Connection('123', 'geo:data', 'geo:new');
+        this.connection = new Connection(userToken, 'geo:data', 'geo:new');
         this.state = {
             list: [],
             show : null

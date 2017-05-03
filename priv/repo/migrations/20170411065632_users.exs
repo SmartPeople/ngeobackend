@@ -3,8 +3,8 @@ defmodule NGEOBackend.Repo.Migrations.Users do
 
   def change do
     create table(:users) do
-      add :name, :string
-      add :password, :string
+      add :email, :string
+      add :hashed_password, :string
       timestamps()
     end
   end

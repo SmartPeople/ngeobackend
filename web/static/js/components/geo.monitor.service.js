@@ -4,26 +4,25 @@ export class Connection {
 
     socket;
     channel;
-    user;
     channelName;
     msgName;
     callback;
 
-    constructor(user, channelName, msgName) {
+    constructor(userToken, channelName, msgName) {
         
-        this.user        = user;
+        this.userToken   = userToken;
         this.channelName = channelName;
         this.msgName     = msgName;
-
+        console.log(this.userToken); 
         this.socket = new Socket("/socket", {
-            // params: {token: window.userToken}
+            params: {token: this.userToken}
             // logger: ((kind, msg, data) => { console.log(`${kind}: ${msg}`, data) })
         });
     }
 
     mount() {
 
-        this.socket.connect({user_id: this.user});
+        this.socket.connect();
         this.socket.onOpen( ev => console.log("OPEN", ev) )
         this.socket.onError( ev => console.log("ERROR", ev) )
         this.socket.onClose( e => console.log("CLOSE", e))

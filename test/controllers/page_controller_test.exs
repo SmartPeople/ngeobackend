@@ -1,4 +1,4 @@
-defmodule NGEOBackend.PageControllerTest do
+defmodule NGEOBackend.AuthPageControllerTest do
   use NGEOBackend.ConnCase
 
   # test "GET /", %{conn: conn} do

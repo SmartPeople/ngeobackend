@@ -37,7 +37,8 @@ defmodule NGEOBackend.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
-     {:ex_admin, github: "smpallen99/ex_admin"}
+     {:ex_admin, github: "smpallen99/ex_admin"},
+     {:doorman, "~> 0.5.1"}
     ]
   end
 
