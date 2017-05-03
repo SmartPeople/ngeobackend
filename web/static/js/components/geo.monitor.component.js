@@ -64,7 +64,7 @@ export class GeoMonitor extends Component {
 
     constructor(props) {
         super(props);
-        this.connection = new Connection('123', 'geo:data', 'geo:new');
+        this.connection = new Connection(userToken, 'geo:data', 'geo:new');
         this.state = {
             list: [],
             show : null

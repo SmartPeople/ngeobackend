@@ -14,7 +14,7 @@ defmodule NGEOBackend.ApiController do
             user: user.email, 
             updated: DateTime.to_unix(updated),
             inserted: DateTime.to_unix(inserted),
-            token: NGEOBackend.User.api_token(user)
+            token: Phoenix.Token.sign(conn, "user socket", user.id)
           }
     else
       conn

@@ -73,18 +73,4 @@ socket.onClose( e => console.log("CLOSE", e))
 //       console.log(msg);
 //     });
 
-// window.channel = channel;
-
-// let geoDataChannel = socket.channel("geo:data", {})
-
-// geoDataChannel.join()
-//   .receive("ignore", () => console.log("auth error"))
-//   .receive("ok", (msg) => console.log(msg));
-
-// geoDataChannel.onError(e => (msg) => console.log(msg))
-// geoDataChannel.onClose(e => (msg) => console.log(msg))
-// geoDataChannel.on("geo:new", msg => {
-//       console.log(msg);
-//     });
-// window.geoDataChannel = geoDataChannel;
 export default socket

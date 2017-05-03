@@ -4,8 +4,7 @@ defmodule NGEOBackend.AuthPageController do
   import Doorman.Login.Session
 
   def index(conn, _params) do
-    Logger.debug(inspect(Doorman.logged_in?(conn)))
-    render conn, "index.html", txt: inspect(get_current_user(conn))
+    render conn, "index.html"
   end
 
   def loginAction(conn, %{"email" => email, "password" => password}) do

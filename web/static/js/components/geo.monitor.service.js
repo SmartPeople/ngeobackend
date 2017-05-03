@@ -23,7 +23,7 @@ export class Connection {
 
     mount() {
 
-        this.socket.connect({user_id: this.user});
+        this.socket.connect({token: this.user});
         this.socket.onOpen( ev => console.log("OPEN", ev) )
         this.socket.onError( ev => console.log("ERROR", ev) )
         this.socket.onClose( e => console.log("CLOSE", e))

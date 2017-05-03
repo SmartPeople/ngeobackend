@@ -34,11 +34,8 @@ defmodule NGEOBackend.User do
   end
 
   def api_token(user) do 
-    Logger.debug( inspect(user) )
     {:ok, inserted} = DateTime.from_naive(user.inserted_at, "Etc/UTC")
-    Logger.debug( inspect(inserted) )
     timestamp       = to_string(DateTime.to_unix(inserted))
-    Logger.debug( inspect(timestamp) )
     %NGEOBackend.User{}
     |> cast(%{email: user.email, password: timestamp}, ~w(email password))
     |> hash_password
