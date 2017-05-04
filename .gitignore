@@ -27,3 +27,5 @@ priv/server.key
 priv/server.pem
 .vagrant
 apikey.js
+
+create.sh
