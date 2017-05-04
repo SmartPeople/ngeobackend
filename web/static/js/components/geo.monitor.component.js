@@ -8,27 +8,36 @@ function round(val) {
     return Math.round(val*100)/100;
 }
 
+function getMapHeight() {
+    return (window.innerHeight - window.innerHeight/5).toString() + 'px';
+}
+
 const style = {
     geoMonitor : {
-        display       : 'flex',
-        flexDirection : 'row',
-        justifyContent: 'space-between',
-        height        : '600px'
+        position: 'relative',
+        height : getMapHeight(),
     },
     geoMap : {
-        width  : '55%',
-        height : '100%',
-        display: 'block',
-        margin : '0 4px'
+        position: 'absolute',
+        width   : '100%',
+        height  : '100%',
+        display : 'block'
     },
     list : {
-        overflow: 'auto',
-        height  : '100%',
-        width   : '15%',
+        overflow    : 'auto',
+        position    : 'absolute',
+        top         : '10px',
+        maxHeight   : '90%',
+        width       : '280px',
+        border      : '1px solid #ccc',
+        borderRadius: '4px',
+        backgroundColor: 'rgba(254,254,254, 0.7)'
     },
     obj : {
-        height  : '100%',
-        width   : '30%',
+        position: 'absolute',
+        top     : '10px',
+        right   : '4px',
+        width   : '260px',
     },
     ul : {
         listStyle: 'none',
@@ -37,6 +46,7 @@ const style = {
     li : {
         cursor : 'pointer'
     },
+    //TODO: Position of the pin might be wrong!
     pin : {
         width    : '52px',
         marginTop: '-36px'
@@ -103,13 +113,16 @@ export class GeoMonitor extends Component {
         if(msg.coords || msg.location) {
             const coords = msg.coords || msg.location.coords;
             return [
-                round(coords.latitude),
-                round(coords.longitude),
-                round(coords.altitude)
+                msg.timestamp
+                // round(coords.latitude),
+                // round(coords.longitude),
+                // round(coords.altitude)
                 ].join(', ');
         } else {
             return msg.message ? msg.message : 'Look at object';
         }
+
+
     }
 
     render() {
@@ -118,6 +131,9 @@ export class GeoMonitor extends Component {
         console.log(this.state.show);
         return (
             <div className="geo-monitor" style={style.geoMonitor}>
+                <div className="map" style={style.geoMap}>
+                     {(this.state.show && (this.state.show.body.type === 0 || this.state.show.body.type === 2)) ? (<Map position={this.state.show}/>) : ('')}
+                </div>
                 <div className="list" style={style.list}>
                     <ul style={style.map}>
                         {list.map((event, i) =>
@@ -127,10 +143,7 @@ export class GeoMonitor extends Component {
                         )}
                     </ul>
                 </div>
-                <div className="map" style={style.geoMap}>
-                     {(this.state.show && (this.state.show.body.type === 0 || this.state.show.body.type === 2)) ? (<Map position={this.state.show}/>) : ('')}
-                </div>
-                <div className="obj"  style={style.obj}><pre>{show}</pre></div>
+                <div className="obj"  style={style.obj}><pre style={{backgroundColor: 'rgba(254,254,254, 0.7)'}} >{show}</pre></div>
             </div>
         );
     }
