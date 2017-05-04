@@ -27,3 +27,6 @@ priv/server.key
 priv/server.pem
 .vagrant
 apikey.js
+
+create.sh
+20170504111553_add_root_user.exs
