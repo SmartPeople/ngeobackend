@@ -12,4 +12,4 @@ docker run -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker:/var/
 docker-compose -f docker-compose.yml stop
 docker-compose -f docker-compose.yml up --build -d
 
-docker-machine ls
+docker ps
