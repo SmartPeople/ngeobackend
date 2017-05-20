@@ -49,6 +49,7 @@ defmodule NGEOBackend.Router do
     pipe_through :private # Use the default public stack
     get "/",           PagesController, :monitoring
     get "/monitoring", PagesController, :monitoring
+    get "/grouped",    PagesController, :grouped_points
   end
 
   scope "/admin", ExAdmin do

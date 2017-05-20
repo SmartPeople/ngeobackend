@@ -8,15 +8,15 @@ defmodule NGEOBackend.AuthPageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "GEO Monitor"
+    assert html_response(conn, 200) =~ "Monitoring"
   end
 
-  test "GET /users", %{conn: conn} do
+  test "GET /admin/users", %{conn: conn} do
     conn = get conn, "/users"
     assert html_response(conn, 200) =~ "Users"
   end
 
-  test "GET /events", %{conn: conn} do
+  test "GET /admin/events", %{conn: conn} do
     conn = get conn, "/events"
     assert html_response(conn, 200) =~ "Events"
   end

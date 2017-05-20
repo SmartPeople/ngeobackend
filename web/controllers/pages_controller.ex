@@ -7,4 +7,10 @@ defmodule NGEOBackend.PagesController do
     render conn, "pages.html"
   end
 
+  def grouped_points(conn, _params) do
+    conn
+    |> assign(:points, NGEOBackend.Event.allEvents())
+    |> render("grouped_points.html")
+  end
+
 end
