@@ -7,7 +7,7 @@
     <title>NGEOBackend!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <script>window.userToken = "<%= assigns[:user_token] %>";</script>
-    <link href="/images/map180.png" rel="icon">
+    <link href="<%= static_path(@conn, "/images/map180.png") %>" rel="icon">
   </head>
 
   <body>
