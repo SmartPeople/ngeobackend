@@ -1,48 +1,58 @@
-<div class="main" style="margin:0 4px;">
-    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-    <h1 class="page-header">All Positions</h1>
-    <main role="main" id ="root">
-        <div id="map" style="height: 500px;"></div>
-        <h2>Position json</h2>
-        <pre id="jsondata"></pre>
-    </main>
+<div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked">
+    <li ><a href="<%= pages_path(@conn, :monitoring) %>">Monitoring</a></li>
+    <li ><a href="<%= pages_path(@conn, :heatmap_points) %>">Heatmap</a></li>
+    <li class="active"><a href="<%= pages_path(@conn, :grouped_points) %>">Clustered points</a></li>
+    </ul>
+</div>
+<div class="col-md-10">
+  
+    <div class="main" style="margin:0 4px;">
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <h1 class="page-header">All Positions</h1>
+        <main role="main" id ="root">
+            <div id="map" style="height: 500px;"></div>
+            <h2>Position json</h2>
+            <pre id="jsondata"></pre>
+        </main>
 
-    <script>
-    function initMap() {
-        const preElm = document.getElementById('jsondata');
-        const map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 2,
-            center: {lat: 28.024, lng: 140.887}
-        });
+        <script>
+        function initMap() {
+            const preElm = document.getElementById('jsondata');
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 2,
+                center: {lat: 28.024, lng: 140.887}
+            });
 
-        const markers = locations.map(function(location, i) {
-            let marker = new google.maps.Marker({
-                position: location.coords,
-                label   : location.label[0]
+            const markers = locations.map(function(location, i) {
+                let marker = new google.maps.Marker({
+                    position: location.coords,
+                    label   : location.label[0]
+                });
+                marker.addListener('click', (e) => {
+                    preElm.innerText = JSON.stringify(location.json, null, 2);
+                });
+                return marker
             });
-            marker.addListener('click', (e) => {
-                preElm.innerText = JSON.stringify(location.json, null, 2);
-            });
-            return marker
-        });
-        const markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-    }
-    const locations = [
-    <%= for p <- filterOut(@points) do %>
-        {
-            id : <%= p.id %>,
-            json: <%= raw(Poison.encode!(p.data)) %>,
-            coords: {
-                lat: <%= p.data["coords"]["latitude"] %>,
-                lng: <%= p.data["coords"]["longitude"] %>
-            }, 
-            label: "<%= p.data["uuid"] %>"
-        },
-    <%= end %>
-    ];
-    </script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1-sW-SSVBGUchUDKo_KSz9-2qyJEDG34&callback=initMap"></script>
+            const markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        }
+        const locations = [
+        <%= for p <- filterOut(@points) do %>
+            {
+                id : <%= p.id %>,
+                json: <%= raw(Poison.encode!(p.data)) %>,
+                coords: {
+                    lat: <%= p.data["coords"]["latitude"] %>,
+                    lng: <%= p.data["coords"]["longitude"] %>
+                }, 
+                label: "<%= p.data["uuid"] %>"
+            },
+        <%= end %>
+        ];
+        </script>
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1-sW-SSVBGUchUDKo_KSz9-2qyJEDG34&callback=initMap"></script>
+    </div>
 </div>

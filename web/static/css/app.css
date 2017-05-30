@@ -56,7 +56,7 @@
 
 .heatmap #floating-panel {
   position: absolute;
-  top: 136px;
+  top: 130px;
   left: 33%;
   z-index: 5;
   background-color: #fff;
@@ -67,4 +67,8 @@
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
   padding-left: 10px;
+}
+
+.nav-stacked{
+  margin-top: 80px;
 }
