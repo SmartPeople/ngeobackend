@@ -1,7 +1,7 @@
 defmodule NGEOBackend.PagesController do
   require Logger
   use NGEOBackend.Web, :controller
-
+  
   def monitoring(conn, _params) do
     # Logger.debug(inspect(Doorman.logged_in?(conn)))
     render conn, "pages.html"
@@ -14,6 +14,14 @@ defmodule NGEOBackend.PagesController do
   end
 
   def heatmap_points(conn, %{"filter" => %{"dt_start" => dt_start, "dt_end" => dt_end, "user_id" => user_id}}) do
+
+    changeset = NGEOBackend.Search.changeset(%NGEOBackend.Search{}, %{"dt_start" => dt_start, "dt_end" => dt_end, "user_id" => user_id})
+    Logger.debug(inspect(changeset))
+
+    # case Integer.parse(dt_start["year"]) do
+    #   { result, _ } -> Logger.debug(inspect(result))
+    #   :error -> raise "oops"
+    # end
     start_dt = 
       NaiveDateTime.from_erl!({
         {

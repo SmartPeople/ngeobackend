@@ -31,7 +31,7 @@
                 </div>&nbsp;&nbsp;
                 <div class="form-group">
                     <%= label(f, :user_id, "User Id:") %>&nbsp;
-                    <%= select f, :user_id, allUsers %>
+                    <%= select f, :user_id, allUsers() %>
                 </div>&nbsp;&nbsp;
                 <%= submit("Filter",  class: "btn btn-default") %>
                 <a class="btn btn-default" href="<%= pages_path(@conn, :heatmap_points) %>">Reset</a>
