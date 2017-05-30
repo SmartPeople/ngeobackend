@@ -56,7 +56,7 @@
 
 .heatmap #floating-panel {
   position: absolute;
-  top: 130px;
+  top: 120px;
   left: 33%;
   z-index: 5;
   background-color: #fff;
