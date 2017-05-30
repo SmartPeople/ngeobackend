@@ -37,4 +37,11 @@ defmodule NGEOBackend.Event do
       NGEOBackend.Repo.all(query)
     end
 
+    def allPositions do
+      query = 
+        from e in NGEOBackend.Event, 
+        order_by: e.inserted_at
+      NGEOBackend.Repo.all(query)
+    end
+
 end
