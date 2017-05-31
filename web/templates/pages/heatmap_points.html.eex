@@ -7,19 +7,11 @@
 </div>
 <div class="col-md-10">
 
-    <div class="main heatmap" style="margin:0 4px;">
+    <div class="main heatmap">
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
         <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-        <h1 class="page-header">Heatmap (<%= numberOfEvents(@points) %> | <%= numberOfPoints(@points) %>)</h1>
+        <h1 class="page-header">Heatmap</h1>
         <main role="main" id ="root">
-            <div id="floating-panel" class="btn-group btn-group-xs" role="group" >
-                <button type="button" class="btn btn-default" onclick="toggleHeatmap()">Toggle Heatmap</button>
-                <button type="button" class="btn btn-default" onclick="changeGradient()">Change gradient</button>
-                <button type="button" class="btn btn-default" onclick="changeRadius()">Change radius</button>
-                <button type="button" class="btn btn-default" onclick="changeOpacity()">Change opacity</button>
-            </div>
-            <div id="map" style="height: 700px;">
-            </div>
             <%= form_for @conn, pages_path(@conn, :heatmap_points), [as: :filter, method: :get, class: "form-inline"], fn f -> %>
                 <div class="form-group">
                     <%= label(f, :dt_start, "Start:") %>&nbsp;
@@ -36,6 +28,16 @@
                 <%= submit("Filter",  class: "btn btn-default") %>
                 <a class="btn btn-default" href="<%= pages_path(@conn, :heatmap_points) %>">Reset</a>
             <% end %>
+            <div id="floating-panel" class="btn-group btn-group-xs" role="group" >
+                <button type="button" class="btn btn-default" onclick="toggleHeatmap()">Toggle Heatmap</button>
+                <button type="button" class="btn btn-default" onclick="changeGradient()">Change gradient</button>
+                <button type="button" class="btn btn-default" onclick="changeRadius()">Change radius</button>
+                <button type="button" class="btn btn-default" onclick="changeOpacity()">Change opacity</button>
+            </div>
+            <div id="map" style="height: 600px;">
+            </div><hr/>
+            <p>Number of events: <strong><%= numberOfEvents(@points) %></strong>, points only <strong><%= numberOfPoints(@points) %></strong></p>
+
         </main>
 
         <script>
@@ -49,8 +51,8 @@
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 2,
-                    center: {lat: 37.775, lng: -122.434},
-                    mapTypeId: 'satellite'
+                    center: {lat: 54.987138927723436, lng: 73.36787667037223},
+                    //mapTypeId: 'satellite'
                 });
 
                 heatmap = new google.maps.visualization.HeatmapLayer({

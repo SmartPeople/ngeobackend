@@ -7,22 +7,21 @@
 </div>
 <div class="col-md-10">
   
-    <div class="main" style="margin:0 4px;">
+    <div class="main">
         <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
         <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
         <h1 class="page-header">All Positions</h1>
         <main role="main" id ="root">
-            <div id="map" style="height: 500px;"></div>
+            <div id="map" style="height: 600px;"></div>
             <h2>Position json</h2>
             <pre id="jsondata"></pre>
         </main>
-
         <script>
         function initMap() {
             const preElm = document.getElementById('jsondata');
             const map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 2,
-                center: {lat: 28.024, lng: 140.887}
+                center: {lat: 54.987138927723436, lng: 73.36787667037223}
             });
 
             const markers = locations.map(function(location, i) {
