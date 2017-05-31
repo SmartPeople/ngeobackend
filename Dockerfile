@@ -6,7 +6,7 @@ ADD . /opt/ngeobackend
 
 WORKDIR /opt/ngeobackend
 
-RUN cd /opt/ngeobackend && mix local.hex --force && mix deps.get && mix local.rebar --force && npm install 
+RUN cd /opt/ngeobackend && mix local.hex --force && mix deps.get && mix local.rebar --force && npm install
 
 RUN MIX_ENV=prod mix compile
 

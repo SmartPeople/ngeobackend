@@ -50,6 +50,7 @@ defmodule NGEOBackend.Router do
     get "/",           PagesController, :monitoring
     get "/monitoring", PagesController, :monitoring
     get "/grouped",    PagesController, :grouped_points
+    get "/heatmap",    PagesController, :heatmap_points
   end
 
   scope "/admin", ExAdmin do

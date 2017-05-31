@@ -1,0 +1,109 @@
+<div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked">
+    <li ><a href="<%= pages_path(@conn, :monitoring) %>">Monitoring</a></li>
+    <li class="active"><a href="<%= pages_path(@conn, :heatmap_points) %>">Heatmap</a></li>
+    <li ><a href="<%= pages_path(@conn, :grouped_points) %>">Clustered points</a></li>
+    </ul>
+</div>
+<div class="col-md-10">
+
+    <div class="main heatmap">
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <h1 class="page-header">Heatmap</h1>
+        <main role="main" id ="root">
+            <%= form_for @conn, pages_path(@conn, :heatmap_points), [as: :filter, method: :get, class: "form-inline"], fn f -> %>
+                <div class="form-group">
+                    <%= label(f, :dt_start, "Start:") %>&nbsp;
+                    <%= date_select f, :dt_start, year: [options: 2017..2100] %>
+                </div>&nbsp;&nbsp;
+                <div class="form-group">
+                    <%= label(f, :dt_end, "End:") %>&nbsp;
+                    <%= date_select f, :dt_end, year: [options: 2017..2100] %>
+                </div>&nbsp;&nbsp;
+                <div class="form-group">
+                    <%= label(f, :user_id, "User Id:") %>&nbsp;
+                    <%= select f, :user_id, allUsers() %>
+                </div>&nbsp;&nbsp;
+                <%= submit("Filter",  class: "btn btn-default") %>
+                <a class="btn btn-default" href="<%= pages_path(@conn, :heatmap_points) %>">Reset</a>
+            <% end %>
+            <div id="floating-panel" class="btn-group btn-group-xs" role="group" >
+                <button type="button" class="btn btn-default" onclick="toggleHeatmap()">Toggle Heatmap</button>
+                <button type="button" class="btn btn-default" onclick="changeGradient()">Change gradient</button>
+                <button type="button" class="btn btn-default" onclick="changeRadius()">Change radius</button>
+                <button type="button" class="btn btn-default" onclick="changeOpacity()">Change opacity</button>
+            </div>
+            <div id="map" style="height: 600px;">
+            </div><hr/>
+            <p>Number of events: <strong><%= numberOfEvents(@points) %></strong>, points only <strong><%= numberOfPoints(@points) %></strong></p>
+
+        </main>
+
+        <script>
+
+            var map, heatmap;
+            function round(val, p) {
+                const m = Math.pow(10, p);
+                return Math.round(val * m)
+            }
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 2,
+                    center: {lat: 54.987138927723436, lng: 73.36787667037223},
+                    //mapTypeId: 'satellite'
+                });
+
+                heatmap = new google.maps.visualization.HeatmapLayer({
+                    data: getPoints(),
+                    map: map, 
+                    dissipating: true
+                });
+            }
+
+            function toggleHeatmap() {
+                eatmap.setMap(heatmap.getMap() ? null : map);
+            }
+
+            function changeGradient() {
+                var gradient = [
+                    'rgba(0, 255, 255, 0)',
+                    'rgba(0, 255, 255, 1)',
+                    'rgba(0, 191, 255, 1)',
+                    'rgba(0, 127, 255, 1)',
+                    'rgba(0, 63, 255, 1)',
+                    'rgba(0, 0, 255, 1)',
+                    'rgba(0, 0, 223, 1)',
+                    'rgba(0, 0, 191, 1)',
+                    'rgba(0, 0, 159, 1)',
+                    'rgba(0, 0, 127, 1)',
+                    'rgba(63, 0, 91, 1)',
+                    'rgba(127, 0, 63, 1)',
+                    'rgba(191, 0, 31, 1)',
+                    'rgba(255, 0, 0, 1)'
+                ]
+                heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+            }
+
+            function changeRadius() {
+                heatmap.set('radius', heatmap.get('radius') ? null : 40);
+            }
+
+            function changeOpacity() {
+                heatmap.set('opacity', heatmap.get('opacity') ? null : 1);
+            }
+
+            // Heatmap data: 500 Points
+            function getPoints() {
+                const locations = [
+                    <%= for p <- filterOut(@points) do %>
+                        new google.maps.LatLng(<%= Float.round(p.data["coords"]["latitude"], 8) %>, <%= Float.round(p.data["coords"]["longitude"], 8) %>),
+                    <%= end %>
+                ];
+                return locations;
+            }
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1-sW-SSVBGUchUDKo_KSz9-2qyJEDG34&libraries=visualization&callback=initMap"></script>
+    </div>
+</div>

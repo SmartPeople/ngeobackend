@@ -25,10 +25,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/monitoring">Dashboard</a></li>
-            <li><a href="/admin">Admin</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="<%= pages_path(@conn, :monitoring) %>">Monitoring</a></li>
+            <li><a href="<%= admin_path(@conn, :dashboard) %>">Admin</a></li>
+            <li><a href="<%= auth_page_path(@conn, :loginAction) %>">Login</a></li>
+            <li><a href="<%= auth_page_path(@conn, :logoutAction) %>">Logout</a></li>
           </ul>
         </div>
       </div>

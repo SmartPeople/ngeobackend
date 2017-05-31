@@ -37,4 +37,19 @@ defmodule NGEOBackend.Event do
       NGEOBackend.Repo.all(query)
     end
 
+    def allPositions do
+      query = 
+        from e in NGEOBackend.Event, 
+        order_by: e.inserted_at
+      NGEOBackend.Repo.all(query)
+    end
+
+    def filteredPositions(start_dt, end_dt, user_id) do
+      query = 
+        from e in NGEOBackend.Event, 
+        order_by: e.inserted_at,
+        where: e.user_id == ^user_id and e.inserted_at >= ^start_dt and e.inserted_at < ^end_dt
+      NGEOBackend.Repo.all(query)
+    end
+
 end
