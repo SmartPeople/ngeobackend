@@ -11,7 +11,7 @@ defmodule NGEOBackend.Search do
 
   def checkInteger(i) do
     case Integer.parse(i) do
-      {r, _} -> []
+      {_r, _} -> []
       :error -> [{:dt_start, "Wrong date format!"}]
     end
   end

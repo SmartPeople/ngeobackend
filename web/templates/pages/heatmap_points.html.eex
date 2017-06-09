@@ -3,6 +3,7 @@
     <li ><a href="<%= pages_path(@conn, :monitoring) %>">Monitoring</a></li>
     <li class="active"><a href="<%= pages_path(@conn, :heatmap_points) %>">Heatmap</a></li>
     <li ><a href="<%= pages_path(@conn, :grouped_points) %>">Clustered points</a></li>
+    <li ><a href="<%= pages_path(@conn, :filter_points) %>">Filter points</a></li>
     </ul>
 </div>
 <div class="col-md-10">
@@ -50,7 +51,7 @@
 
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 2,
+                    zoom: 8,
                     center: {lat: 54.987138927723436, lng: 73.36787667037223},
                     //mapTypeId: 'satellite'
                 });

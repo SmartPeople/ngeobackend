@@ -3,6 +3,7 @@
     <li  class="active"><a href="<%= pages_path(@conn, :monitoring) %>">Monitoring</a></li>
     <li ><a href="<%= pages_path(@conn, :heatmap_points) %>">Heatmap</a></li>
     <li ><a href="<%= pages_path(@conn, :grouped_points) %>">Clustered points</a></li>
+    <li ><a href="<%= pages_path(@conn, :filter_points) %>">Filter points</a></li>
     </ul>
 </div>
 <div class="col-md-10">

@@ -1,0 +1,81 @@
+<div class="col-md-2">
+    <ul class="nav nav-pills nav-stacked">
+    <li ><a href="<%= pages_path(@conn, :monitoring) %>">Monitoring</a></li>
+    <li ><a href="<%= pages_path(@conn, :heatmap_points) %>">Heatmap</a></li>
+    <li ><a href="<%= pages_path(@conn, :grouped_points) %>">Clustered points</a></li>
+    <li class="active"><a href="<%= pages_path(@conn, :filter_points) %>">Filter points</a></li>
+    </ul>
+</div>
+<div class="col-md-10">
+
+    <div class="main heatmap">
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <h1 class="page-header">Filter</h1>
+        <main role="main" id ="root">
+            <%= form_for @conn, pages_path(@conn, :filter_points), [as: :filter, method: :get, class: "form-inline"], fn f -> %>
+                <div class="form-group">
+                    <%= label(f, :dt_start, "Start:") %>&nbsp;
+                    <%= datetime_select f, :dt_start, year: [options: 2017..2100] %>
+                </div>&nbsp;&nbsp;
+                <div class="form-group">
+                    <%= label(f, :dt_end, "End:") %>&nbsp;
+                    <%= datetime_select f, :dt_end, year: [options: 2017..2100] %>
+                </div>&nbsp;&nbsp;
+                <div class="form-group">
+                    <%= label(f, :user_id, "User Id:") %>&nbsp;
+                    <%= select f, :user_id, allUsers() %>
+                </div>&nbsp;&nbsp;
+                <%= submit("Filter",  class: "btn btn-default") %>
+                <a class="btn btn-default" href="<%= pages_path(@conn, :filter_points) %>">Reset</a>
+            <% end %>
+            <div id="floating-panel" class="btn-group btn-group-xs" role="group" >
+                <button type="button" class="btn btn-default" onclick="toggleHeatmap()">Toggle Heatmap</button>
+                <button type="button" class="btn btn-default" onclick="changeGradient()">Change gradient</button>
+                <button type="button" class="btn btn-default" onclick="changeRadius()">Change radius</button>
+                <button type="button" class="btn btn-default" onclick="changeOpacity()">Change opacity</button>
+            </div>
+            <div id="map" style="height: 600px;"></div>
+            <h2>Position json</h2>
+            <pre id="jsondata"></pre><hr/>
+            <p>Number of events: <strong><%= numberOfEvents(@points) %></strong>, points only <strong><%= numberOfPoints(@points) %></strong></p>
+
+        </main>
+
+        <script>
+        function initMap() {
+            const preElm = document.getElementById('jsondata');
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 2,
+                center: {lat: 54.987138927723436, lng: 73.36787667037223}
+            });
+
+            const markers = locations.map(function(location, i) {
+                let marker = new google.maps.Marker({
+                    position: location.coords,
+                    label   : location.label[0],
+                    map: map
+                });
+                marker.addListener('click', (e) => {
+                    preElm.innerText = JSON.stringify(location.json, null, 2);
+                });
+                return marker
+            });
+        }
+        const locations = [
+        <%= for p <- filterOut(@points) do %>
+            {
+                id : <%= p.id %>,
+                json: <%= raw(Poison.encode!(p.data)) %>,
+                coords: {
+                    lat: <%= p.data["coords"]["latitude"] %>,
+                    lng: <%= p.data["coords"]["longitude"] %>
+                }, 
+                label: "<%= p.data["uuid"] %>"
+            },
+        <%= end %>
+        ];
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1-sW-SSVBGUchUDKo_KSz9-2qyJEDG34&libraries=visualization&callback=initMap"></script>
+    </div>
+</div>

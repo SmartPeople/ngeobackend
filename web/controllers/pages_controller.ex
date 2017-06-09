@@ -2,26 +2,19 @@ defmodule NGEOBackend.PagesController do
   require Logger
   use NGEOBackend.Web, :controller
   
-  def monitoring(conn, _params) do
-    # Logger.debug(inspect(Doorman.logged_in?(conn)))
-    render conn, "pages.html"
-  end
+  def monitoring(conn, _params), do: render conn, "pages.html"
 
-  def grouped_points(conn, _params) do
+  def grouped_points(conn, _params), do:
     conn
     |> assign(:points, NGEOBackend.Event.allPositions())
     |> render("grouped_points.html")
-  end
+
 
   def heatmap_points(conn, %{"filter" => %{"dt_start" => dt_start, "dt_end" => dt_end, "user_id" => user_id}}) do
 
     changeset = NGEOBackend.Search.changeset(%NGEOBackend.Search{}, %{"dt_start" => dt_start, "dt_end" => dt_end, "user_id" => user_id})
     Logger.debug(inspect(changeset))
 
-    # case Integer.parse(dt_start["year"]) do
-    #   { result, _ } -> Logger.debug(inspect(result))
-    #   :error -> raise "oops"
-    # end
     start_dt = 
       NaiveDateTime.from_erl!({
         {
@@ -45,11 +38,53 @@ defmodule NGEOBackend.PagesController do
     |> assign(:points, NGEOBackend.Event.filteredPositions(start_dt, end_dt, user_id))
     |> render("heatmap_points.html")
   end
-
-  def heatmap_points(conn, _params) do
+  def heatmap_points(conn, _params), do:
     conn
     |> assign(:points, NGEOBackend.Event.allPositions())
     |> render("heatmap_points.html")
+
+  def filter_points(conn, %{"filter" => %{"dt_start" => dt_start, "dt_end" => dt_end, "user_id" => user_id}}) do
+
+    changeset = NGEOBackend.Search.changeset(%NGEOBackend.Search{}, %{"dt_start" => dt_start, "dt_end" => dt_end, "user_id" => user_id})
+    Logger.debug(inspect(dt_start))
+    Logger.debug(inspect(dt_end))
+    Logger.debug(inspect(changeset))
+
+    start_dt = 
+      NaiveDateTime.from_erl!({
+        {
+          String.to_integer(dt_start["year"]), 
+          String.to_integer(dt_start["month"]),
+          String.to_integer(dt_start["day"])
+        }, 
+        {
+          String.to_integer(dt_start["hour"]), 
+          String.to_integer(dt_start["minute"]),
+          00
+        }
+      });
+
+    end_dt   = 
+      NaiveDateTime.from_erl!({
+        {
+          String.to_integer(dt_end["year"]), 
+          String.to_integer(dt_end["month"]),
+          String.to_integer(dt_end["day"])
+        }, 
+        {
+          String.to_integer(dt_end["hour"]), 
+          String.to_integer(dt_end["minute"]),
+          00
+        }
+      });
+    conn
+    |> assign(:points, NGEOBackend.Event.filteredPositions(start_dt, end_dt, user_id))
+    |> render("filter_points.html")
   end
+  def filter_points(conn, _params), do:
+    conn
+    |> assign(:points,[])
+    |> render("filter_points.html")
+
 
 end
